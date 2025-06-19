@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Homepage - Reports, Forecasts, Dashboards</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="loader-overlay">
+    <div class="loader-content">
+      <div class="loader-bar"><div class="loader-shimmer"></div></div>
+      <span class="loader-percent">1%</span>
+    </div>
+  </div>
+  <nav class="navbar">
+    <div class="navbar-logo">Lusion</div>
+    <ul class="navbar-links">
+      <li><a href="#">Home</a></li>
+      <li><a href="#">Features</a></li>
+      <li><a href="#">Pricing</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+    <button id="mode-toggle" class="mode-toggle" aria-label="Toggle dark/light mode">🌙</button>
+  </nav>
+  <div class="top-ratings">
+    <b><span>★ 4.8 rating on Capterra</span></b>
+    <b><span>★ 4.8 rating on G</span></b>
+    <b><span>★ 350+ reviews on Xero</span></b>
+    <b><span>★ 550+ reviews on QuickBooks</span></b>
+  </div>
+  <div class="main-content">
+    <div class="headline">
+      <span class="fade-on-dash-hover">Create reports, forecasts,</span><br><span class="hover-dashboards">dashboards</span><span class="fade-on-dash-hover"> & consolidations</span>
+    </div>
+    <div class="subheadline">✨ Now with AI-insights</div>
+    <button class="cta-btn">Start 14-day free trial →</button>
+    <div class="see-row">
+      <img class="film-img" src="film.png">
+      <a class="see-link" href="#">See what we do</a>
+    </div>
+  </div>
+
+  <div class="bg-blur bg-blur1"></div>
+  <div class="bg-blur bg-blur2"></div>
+  <div class="bg-blur bg-blur3"></div>
+  <div class="bg-blur bg-blur4"></div>
+  <!-- Place this after .main-content -->
+  <div class="dashboard-images" id="dashboardImages">
+    <img src="graph.png" alt="Graph" class="dashboard-img dashboard-img-1" />
+    <img src="stats.png" alt="Stats" class="dashboard-img dashboard-img-2" />
+    <img src="cash.png" alt="Cash" class="dashboard-img dashboard-img-3" />
+    <img src="cards.png" alt="Cards" class="dashboard-img dashboard-img-4" />
+  </div>
+  <div class="center-bar"></div>
+
+  <footer>
+    <section id="partners-section" class="partners-section">
+      <h2>Our Trusted Partners</h2>
+      <div class="partners-logos">
+        <a href="https://www.perplexity.ai/" target="_blank" rel="noopener noreferrer"><img src="perplexity.webp" alt="Perplexity" class="partner-logo-img" /></a>
+        <a href="https://supercell.com/" target="_blank" rel="noopener noreferrer"><img src="supercell.png" alt="Supercell" class="partner-logo-img" /></a>
+        <a href="https://monzo.com/" target="_blank" rel="noopener noreferrer"><img src="monzo.png" alt="Monzo" class="partner-logo-img" /></a>
+        <a href="https://raycast.com/" target="_blank" rel="noopener noreferrer"><img src="raycast.png" alt="Raycast" class="partner-logo-img" /></a>
+        <a href="https://retool.com/" target="_blank" rel="noopener noreferrer"><img src="retool.png" alt="Retool" class="partner-logo-img" /></a>
+        <a href="https://mercury.com/" target="_blank" rel="noopener noreferrer"><img src="mercury.png" alt="Mercury" class="partner-logo-img" /></a>
+      </div>
+    </section>
+  </footer>
+  <div class="number-tracker">123,456</div>
+  <script src="dashboard-hover.js"></script>
+  <script>
+   
+    document.getElementById('partners-section').addEventListener('click', function() {
+      var names = document.getElementById('partnersNames');
+      names.style.display = names.style.display === 'none' ? 'block' : 'none';
+    });
+  
+    const modeToggle = document.getElementById('mode-toggle');
+    const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+    const savedMode = localStorage.getItem('site-mode');
+    function setMode(mode) {
+      if(mode === 'light') {
+        document.body.classList.add('light-mode');
+        modeToggle.textContent = '☀️';
+      } else {
+        document.body.classList.remove('light-mode');
+        modeToggle.textContent = '🌙';
+      }
+    }
+  
+    if(savedMode) {
+      setMode(savedMode);
+    } else if(prefersLight) {
+      setMode('light');
+    } else {
+      setMode('dark');
+    }
+    modeToggle.addEventListener('click', function() {
+      const isLight = document.body.classList.toggle('light-mode');
+      if(isLight) {
+        modeToggle.textContent = '☀️';
+        localStorage.setItem('site-mode', 'light');
+      } else {
+        modeToggle.textContent = '🌙';
+        localStorage.setItem('site-mode', 'dark');
+      }
+    });
+   
+    const loaderOverlay = document.getElementById('loader-overlay');
+    const loaderPercent = document.querySelector('.loader-percent');
+    const loaderBar = document.querySelector('.loader-bar');
+    let percent = 1;
+    function animateLoader() {
+      if(percent <= 100) {
+        loaderPercent.textContent = percent + '%';
+        loaderBar.style.width = percent + '%';
+        percent++;
+        setTimeout(animateLoader, 12);
+      } else {
+        loaderOverlay.style.opacity = 0;
+        setTimeout(() => loaderOverlay.style.display = 'none', 400);
+      }
+    }
+    animateLoader();
+  </script>
+</body>
+</html> 
